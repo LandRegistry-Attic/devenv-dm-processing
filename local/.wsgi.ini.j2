@@ -8,7 +8,7 @@ stdout_logfile=/vagrant/logs/{{ name }}/output.log
 stderr_logfile=/vagrant/logs/{{ name }}/error.log
 user=vagrant
 directory={{ path }}
-command={{venv}}/bin/gunicorn {% if conf['entrypoint'] -%}
+command={{venv}}/bin/gunicorn --reload {% if conf['entrypoint'] -%}
 {{ conf['entrypoint'] }}
 {%- else -%}
 application.app

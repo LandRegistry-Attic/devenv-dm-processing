@@ -29,7 +29,7 @@ echo 'export PATH=$PATH:/vagrant/local' >> ${HOME}/.bash_profile
 
 # Initially we need to install a load of junk thats not provided by landregistry/centos
 echo "Installing system dependencies"
-sudo yum install -y git GitPython PyYAML python-devel python-pip python-virtualenv python-jinja2 supervisor
+sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-virtualenv python-jinja2 supervisor
 
 # TEMP
 sudo yum install -y gcc -q
