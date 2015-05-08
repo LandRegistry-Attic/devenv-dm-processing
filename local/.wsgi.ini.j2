@@ -1,0 +1,27 @@
+# Configuration file for {{ name }}
+
+[program:{{ name }}-web]
+autostart=true
+autorestart=true
+stopsignal=QUIT
+stdout_logfile=/vagrant/logs/{{ name }}/output.log
+stderr_logfile=/vagrant/logs/{{ name }}/error.log
+user=vagrant
+directory={{ path }}
+command={{venv}}/bin/gunicorn {% if conf['entrypoint'] -%}
+{{ conf['entrypoint'] }}
+{%- else -%}
+application.app
+{% endif %}
+environment=PATH="{{ venv }}/bin",
+{%- if conf['vars'] -%}
+  {%- for key,value in conf['vars'].items() -%}
+    {{ key }}="{{ value}}",
+  {%- endfor -%}
+{%- endif -%}
+{%- if conf['port'] -%}
+PORT={{ conf['port'] }}
+{% endif %}
+
+[group:{{ name }}]
+programs={{ name }}-web

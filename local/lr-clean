@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+logs="/vagrant/logs/$1"
+apps="/vagrant/apps/$1"
+venv="/vagrant/.venv/$1"
+
+[ -d $logs ] && rm -rf $logs
+[ -d $apps ] && rm -rf $apps
+[ -d $venv ] && rm -rf $venv

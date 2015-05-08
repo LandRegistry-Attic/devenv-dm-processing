@@ -1,0 +1,10 @@
+---
+
+  applications:
+    speedrun-python:
+      repo: https://github.com/benfairless/speedrun-python.git
+      branch: master
+      port: 5001
+      entrypoint: application.hello:app
+      vars:
+        LOGLEVEL: info
