@@ -32,7 +32,10 @@ def gitSetup(name,repo,branch):
     else:
         # Fetch latest upstream for an existing repo
         repo = git.Repo(path)
-        repo.remotes['origin'].fetch()
+        try:
+            repo.remotes['origin'].fetch()
+        except AssertionError:
+            say(name,'Unable to fetch latest code as there are conflicts. Run git fetch automatically')
 
     # Switch git branches and create if necessary
     newbranch = None
