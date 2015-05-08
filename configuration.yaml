@@ -1,6 +1,14 @@
 ---
 
   applications:
+
+    casework-prototypes:
+      repo: https://github.com/AndyPorter/casework-prototypes.git
+      branch: master
+      port: 5000
+      entrypoint: app.server:app
+      vars:
+
     speedrun-python:
       repo: https://github.com/benfairless/speedrun-python.git
       branch: master
