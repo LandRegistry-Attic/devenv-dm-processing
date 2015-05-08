@@ -89,7 +89,12 @@ def supervisorTemplate():
 
 # Setup applications
 def setup(name,conf,template):
-    path = gitSetup(name,conf['repo'],conf['branch'])
+    # This is a little redundant at this point as gitSetup returns the same value
+    if conf['repo'] != Null:
+        path = gitSetup(name,conf['repo'],conf['branch'])
+    else:
+        path = paths['app'] + '/' + name
+
     ini = '%s/%s.ini' % (paths['supervisor'],name)
     # For now, we'll just assume everything is a flask application:
     appType = 'wsgi'
