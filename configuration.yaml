@@ -16,3 +16,10 @@
       entrypoint: application.hello:app
       vars:
         LOGLEVEL: info
+
+    cases-alpha:
+      repo: https://github.com/benfairless/cases-alpha.git
+      branch: master
+      port: 5002
+      entrypoint: application.app
+      vars:
