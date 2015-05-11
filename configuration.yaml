@@ -17,8 +17,8 @@
       vars:
         LOGLEVEL: info
 
-    cases-alpha:
-      repo: https://github.com/benfairless/cases-alpha.git
+    caselist-alpha:
+      repo: https://github.com/LandRegistry/caselist-alpha.git
       branch: master
       port: 5002
       entrypoint: application.app
