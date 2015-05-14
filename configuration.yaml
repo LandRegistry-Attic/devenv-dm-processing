@@ -3,21 +3,21 @@
   applications:
 
     cases-api:
-      repo: git@github.com:LandRegistry/cases-api.git
+      repo: https://github.com/LandRegistry/cases-api.git
       branch: master
       port: 5001
       entrypoint: application.cases-api:app
       vars:
 
     cases-frontend:
-      repo: git@github.com:LandRegistry/cases-frontend.git
+      repo: https://github.com/LandRegistry/cases-frontend.git
       branch: master
       port: 5002
       entrypoint: application.cases-frontend:app
       vars:
 
     casework-frontend:
-      repo: git@github.com:LandRegistry/casework-frontend.git
+      repo: https://github.com/LandRegistry/casework-frontend.git
       branch: master
       port: 5003
       entrypoint: application.casework-frontend:app
