@@ -31,6 +31,25 @@ echo 'export PATH=$PATH:/vagrant/local' >> ${HOME}/.bash_profile
 echo "Installing system dependencies"
 sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-virtualenv python-jinja2 supervisor
 
+#install ruby
+# system update
+yum -y update
+yum -y groupinstall "Development Tools"
+sudo yum -y install ruby-devel
+
+#install phantomjs
+sudo yum -y install gcc gcc-c++ make flex bison gperf ruby \
+  openssl-devel freetype-devel fontconfig-devel libicu-devel sqlite-devel \
+  libpng-devel libjpeg-devel
+
+  git clone git://github.com/ariya/phantomjs.git
+  cd phantomjs
+  git checkout 2.0
+  ./build.sh
+
+#install bundler
+gem install bundler
+
 # TEMP
 sudo yum install -y gcc -q
 sudo systemctl stop firewalld
