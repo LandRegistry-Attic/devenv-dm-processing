@@ -16,10 +16,3 @@
       entrypoint: application:app
       vars:
         SETTINGS: config.DevelopmentConfig
-
-    casework-frontend:
-      repo: https://github.com/LandRegistry/casework-frontend.git
-      branch: master
-      port: 5003
-      entrypoint: application:app
-      vars:
