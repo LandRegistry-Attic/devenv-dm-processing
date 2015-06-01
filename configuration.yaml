@@ -16,3 +16,10 @@
       entrypoint: application:app
       vars:
         SETTINGS: config.DevelopmentConfig
+
+    register-metadata:
+      repo: https://github.com/LandRegistry/register-metadata.git
+      branch: master
+      port: 5003
+      entrypoint: application:app
+      vars:

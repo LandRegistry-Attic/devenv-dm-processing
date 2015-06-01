@@ -28,7 +28,7 @@ echo 'export PATH=$PATH:/vagrant/local' >> ${HOME}/.bash_profile
 [ ! -d /vagrant/logs ] && mkdir -p /vagrant/logs
 
 # Initially we need to install a load of junk thats not provided by landregistry/centos
-echo "Installing system dependencies"
+echo "- - - Installing system dependencies - - -"
 sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-virtualenv python-jinja2 supervisor
 
 #install ruby
@@ -39,9 +39,9 @@ sudo yum -y install ruby-devel
 sudo yum -y install gcc gcc-c++ make flex bison gperf ruby \
   openssl-devel freetype-devel fontconfig-devel libicu-devel sqlite-devel \
   libpng-devel libjpeg-devel
-  
+
 #install phantomjs
-echo "installing phantomjs"
+echo "- - - installing phantomjs - - -"
   cd ~
   export PHANTOM_JS="phantomjs-1.9.7-linux-x86_64"
   wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
@@ -53,7 +53,16 @@ echo "installing phantomjs"
   ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/bin/phantomjs
 
 #install bundler
+echo "- - - installing bundler - - -"
 gem install bundler
+
+#install postgresql
+echo "- - - installing postgresql - - -"
+sudo yum install -y http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
+sudo yum install -y postgresql94-server postgresql94-contrib
+/usr/pgsql-9.4/bin/postgresql94-setup initdb
+systemctl enable postgresql-9.4.service
+systemctl start postgresql-9.4.service
 
 # TEMP
 sudo yum install -y gcc -q
@@ -65,9 +74,9 @@ sudo systemctl enable supervisord >/dev/null 2>&1
 sudo chown -R vagrant:vagrant /etc/supervisord.d/
 
 # Set up applications
-echo "Configuring applications"
+echo "- - - Configuring applications - - -"
 sudo su vagrant -c /vagrant/local/lr-setup-apps
 
 # Load supervisor config and start applications
-echo "Starting services"
+echo "- - - Starting services - - -"
 sudo supervisorctl reload >/dev/null
