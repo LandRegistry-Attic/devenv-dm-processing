@@ -32,14 +32,16 @@ $ vagrant plugin install vagrant-cachier
 
 ##How to query the postgres database with PSQL
 
-Login to the centos virtual machine.  Switch to root with
+Login to the centos virtual machine.  Switch to root with:
 
 ```
 sudo -i
 ```
 
-login to the system of record database with this
+login to the system of record database with this:
 
 ```
 psql -U workregister workingregister
 ```
+
+
