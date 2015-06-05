@@ -23,3 +23,10 @@
       port: 5003
       entrypoint: application:app
       vars:
+
+    update-register:
+      repo: https://github.com/LandRegistry/update-register.git
+      branch: master
+      port: 5003
+      entrypoint: application:app
+      vars:
