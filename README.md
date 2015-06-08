@@ -41,7 +41,7 @@ sudo -i
 login to the system of record database with this:
 
 ```
-psql -U workregister workingregister
+psql -U workingregister workingregister
 ```
 
 
