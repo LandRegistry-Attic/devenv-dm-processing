@@ -57,12 +57,10 @@ echo "- - - installing bundler - - -"
 gem install bundler
 
 #install postgresql
-echo "- - - installing postgresql - - -"
-sudo yum install -y http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
-sudo yum install -y postgresql94-server postgresql94-contrib
-/usr/pgsql-9.4/bin/postgresql94-setup initdb
-systemctl enable postgresql-9.4.service
-systemctl start postgresql-9.4.service
+gem install --no-ri --no-rdoc puppet:3.7.5
+puppet module install puppetlabs-apt --version "<2.0.0"
+puppet module install puppetlabs-postgresql
+puppet apply /vagrant/manifests/postgres.pp
 
 # TEMP
 sudo yum install -y gcc -q
