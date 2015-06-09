@@ -39,7 +39,7 @@ sudo yum -y install ruby-devel
 sudo yum -y install gcc gcc-c++ make flex bison gperf ruby \
   openssl-devel freetype-devel fontconfig-devel libicu-devel sqlite-devel \
   libpng-devel libjpeg-devel
-  
+
 #install phantomjs
 echo "installing phantomjs"
   cd ~
@@ -71,3 +71,5 @@ sudo su vagrant -c /vagrant/local/lr-setup-apps
 # Load supervisor config and start applications
 echo "Starting services"
 sudo supervisorctl reload >/dev/null
+
+sudo -i -u vagrant source /vagrant/provision-daylist-adapter.sh
