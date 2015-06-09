@@ -28,7 +28,7 @@ echo 'export PATH=$PATH:/vagrant/local' >> ${HOME}/.bash_profile
 [ ! -d /vagrant/logs ] && mkdir -p /vagrant/logs
 
 # Initially we need to install a load of junk thats not provided by landregistry/centos
-echo "Installing system dependencies"
+echo "- - - Installing system dependencies - - -"
 sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-virtualenv python-jinja2 supervisor
 
 #install ruby
@@ -41,7 +41,7 @@ sudo yum -y install gcc gcc-c++ make flex bison gperf ruby \
   libpng-devel libjpeg-devel
 
 #install phantomjs
-echo "installing phantomjs"
+echo "- - - installing phantomjs - - -"
   cd ~
   export PHANTOM_JS="phantomjs-1.9.7-linux-x86_64"
   wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
@@ -53,7 +53,21 @@ echo "installing phantomjs"
   ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/bin/phantomjs
 
 #install bundler
+echo "- - - installing bundler - - -"
 gem install bundler
+
+#install postgresql
+gem install --no-ri --no-rdoc puppet:3.7.5
+puppet module install puppetlabs-apt --version "<2.0.0"
+puppet module install puppetlabs-postgresql
+puppet apply /vagrant/manifests/postgres.pp
+#puppet does not configure headers.  So later installation of psycopg2 fails because libpq-fe.h is not found.
+#install postgresql-devel again to fix this (or fix the puppet installation).
+sudo yum -y install postgresql-devel
+#set known path to pgconfig so psycopg2 can install
+if [ -d /usr/pgsql-9.3/bin ]; then
+  export PATH=$PATH:/usr/pgsql-9.3/bin
+fi
 
 # TEMP
 sudo yum install -y gcc -q
@@ -65,11 +79,11 @@ sudo systemctl enable supervisord >/dev/null 2>&1
 sudo chown -R vagrant:vagrant /etc/supervisord.d/
 
 # Set up applications
-echo "Configuring applications"
+echo "- - - Configuring applications - - -"
 sudo su vagrant -c /vagrant/local/lr-setup-apps
 
 # Load supervisor config and start applications
-echo "Starting services"
+echo "- - - Starting services - - -"
 sudo supervisorctl reload >/dev/null
 
 sudo -i -u vagrant source /vagrant/provision-daylist-adapter.sh

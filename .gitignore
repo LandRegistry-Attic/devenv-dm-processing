@@ -1,5 +1,7 @@
 .vagrant/
 .venv/
+.idea/
 logs/
 apps/
+.coverage
 *.iml
