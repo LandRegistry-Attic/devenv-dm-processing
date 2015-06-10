@@ -86,4 +86,12 @@ sudo su vagrant -c /vagrant/local/lr-setup-apps
 echo "- - - Starting services - - -"
 sudo supervisorctl reload >/dev/null
 
-sudo -i -u vagrant source /vagrant/provision-daylist-adapter.sh
+yum install -y git
+
+yum install -y java-1.7.0-openjdk-devel
+
+wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+
+yum install -y apache-maven
+
+sudo -i -u vagrant source /vagrant/local/provision-daylist-adapter.sh
