@@ -5,3 +5,4 @@ logs/
 apps/
 .coverage
 *.iml
+.DS_Store
