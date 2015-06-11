@@ -9,3 +9,7 @@ rvm gemset globalcache enable
 
 echo "Installing JRuby..."
 rvm install jruby-1.7.19
+
+echo "Give Vagrant ownership RVM and Gems..."
+sudo chown -R vagrant:vagrant /vagrant/.rvm
+sudo chown -R vagrant:vagrant /vagrant/.gem
