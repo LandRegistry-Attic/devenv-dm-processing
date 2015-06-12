@@ -53,7 +53,7 @@ echo "- - - installing phantomjs - - -"
   ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/bin/phantomjs
 
 #install bundler
-echo "- - - installing bundler - - -"
+echo "- - - Installing bundler - - -"
 gem install bundler
 
 #install postgresql
