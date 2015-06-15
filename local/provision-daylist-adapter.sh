@@ -14,9 +14,8 @@ echo "- - - Give Vagrant ownership of RVM and Gem directories - - -"
 sudo chown -R vagrant /home/vagrant/.rvm
 sudo chown -R vagrant /home/vagrant/.gem
 
-echo "- - - Setup Daylist Adapter - - -"
+echo "- - - Attempting to setup Daylist Adapter - - -"
 cd /vagrant/apps/
-git clone git@git.lr.net:casework/daylist-adapter.git
-cd /vagrant/apps/daylist-adapter/
-bundle install
-torquebox deploy
+if [ ! -d /vagrant/apps/daylist-adapter/ ];
+then (git clone git@git.lr.net:casework/daylist-adapter.git && cd /vagrant/apps/daylist-adapter/ && bundle install && torquebox deploy && echo "- - - Successfully setup Daylist Adapter - - -") || echo "- - - Can't install adapters off DITI - --"
+fi
