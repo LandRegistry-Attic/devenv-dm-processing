@@ -94,4 +94,4 @@ wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.re
 
 yum install -y apache-maven
 
-sudo -i -u vagrant source /vagrant/local/provision-daylist-adapter.sh
+sudo -i -u vagrant source /vagrant/local/provision-adapters.sh
