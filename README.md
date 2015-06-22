@@ -16,6 +16,34 @@ Requirements:
 
 Inside the project folder, simply run `vagrant up` and then connect to your projects on the ports defined in `configuration.yaml`
 
+## Apps
+### [Cases API:](https://github.com/LandRegistry/cases-api)
+
+`localhost:5001`
+- **GET POST** `/cases`
+- **GET** `/cases/<caseid>`
+
+### [Cases Frontend:](https://github.com/LandRegistry/cases-frontend)
+
+`localhost:5002`
+- `/cases`
+- `/cases/<casenumber>`
+
+### [Titles API:](https://github.com/LandRegistry/titles-api)
+
+`localhost:5005`
+- **GET** `/validate/<titlenumber>`
+
+### Daylist Adapter:
+
+`localhost:8888/DaylistAdapter`
+- **POST** `/cases/<titlenumber>`
+
+### Titles Adapter:
+
+`localhost:8888/TitlesAdapter`
+- **POST** `/titles/<titlenumber>`
+
 
 ## Notes
 The development environment relies on [Vagrant](https://www.vagrantup.com/).
