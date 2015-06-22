@@ -34,12 +34,12 @@ Inside the project folder, simply run `vagrant up` and then connect to your proj
 `localhost:5005`
 - **GET** `/validate/<titlenumber>`
 
-### Daylist Adapter:
+### [Daylist Adapter:](http://git.lr.net/casework/daylist-adapter)
 
 `localhost:8888/DaylistAdapter`
 - **POST** `/cases/<titlenumber>`
 
-### Titles Adapter:
+### [Titles Adapter:](http://git.lr.net/casework/titles-adapter)
 
 `localhost:8888/TitlesAdapter`
 - **POST** `/titles/<titlenumber>`
@@ -71,5 +71,3 @@ login to the system of record database with this:
 ```
 psql -U workingregister workingregister
 ```
-
-
