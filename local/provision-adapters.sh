@@ -10,12 +10,23 @@ rvm gemset globalcache enable
 echo "- - - Installing JRuby..."
 rvm install jruby-1.7.19
 
+echo "- - - Installing Ruby - - -"
+rvm install ruby-1.9.3
+
 echo "- - - Give Vagrant ownership of RVM and Gem directories - - -"
 sudo chown -R vagrant /home/vagrant/.rvm
 sudo chown -R vagrant /home/vagrant/.gem
 
-echo "- - - Installing Bundler - - -"
+echo "- - - Installing Bundler in JRuby - - -"
+rvm use jruby-1.7.19
 gem install bundler
+
+echo "- - - Installing Bundler in Ruby - - -"
+rvm use ruby-1.9.3
+gem install bundler
+
+echo "- - - Switch back to JRuby - - -"
+rvm use jruby-1.7.19
 
 echo "- - - Attempting to setup Daylist Adapter - - -"
 cd /vagrant/apps/
