@@ -37,3 +37,10 @@
       port: 5005
       entrypoint: application:app
       vars:
+
+    auto-process-charge:
+      repo: https://github.com/LandRegistry/auto-process-charge.git
+      branch: master
+      port: 5006
+      entrypoint: application:app
+      vars:
