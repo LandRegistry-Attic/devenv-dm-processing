@@ -8,6 +8,7 @@ conf = YAML.load_file("#{dir}/configuration.yaml")
 
 Vagrant.configure(2) do |node|
   node.vm.box              = "landregistry/centos"
+  node.vm.box_version      = "0.1.1"
   node.vm.box_check_update = true
   node.ssh.forward_agent = true
 
