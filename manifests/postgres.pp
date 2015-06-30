@@ -45,6 +45,10 @@ postgresql::server::db { 'workingregister':
   password => 'md511c5a6395e27555ef43eb7b05c76d7c1',
 }
 
+postgresql::server::db { 'registermetadata':
+  user     => 'vagrant',
+}
+
 postgresql::server::role { 'vagrant':
   password_hash => postgresql_password('vagrant', 'vagrant'),
   superuser => true,
@@ -64,5 +68,17 @@ postgresql::server::database_grant { 'grant vagrant access to working register':
 postgresql::server::database_grant { 'grant root access to working register':
   privilege => 'ALL',
   db        => 'workingregister',
+  role      => 'root',
+}
+
+postgresql::server::database_grant { 'grant vagrant access to register metadata':
+  privilege => 'ALL',
+  db        => 'registermetadata',
+  role      => 'vagrant',
+}
+
+postgresql::server::database_grant { 'grant root access to register metadata':
+  privilege => 'ALL',
+  db        => 'registermetadata',
   role      => 'root',
 }

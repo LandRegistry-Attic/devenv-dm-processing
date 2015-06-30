@@ -95,3 +95,10 @@ wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.re
 yum install -y apache-maven
 
 sudo -i -u vagrant source /vagrant/local/provision-adapters.sh
+
+#Install provisions for all applications we've got
+provision_scripts=`find /vagrant/apps -regex "/vagrant/apps/.*/provision.sh"`
+for script in $provision_scripts
+do
+	bash $script
+done
