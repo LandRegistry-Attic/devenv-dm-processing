@@ -28,8 +28,9 @@
       repo: https://github.com/LandRegistry/update-register.git
       branch: master
       port: 5004
-      entrypoint: application:app
+      entrypoint: application.routes:app
       vars:
+        SETTINGS: config.DevelopmentConfig
 
     titles-api:
       repo: https://github.com/LandRegistry/titles-api.git
@@ -44,3 +45,4 @@
       port: 5006
       entrypoint: application:app
       vars:
+        SETTINGS: config.DevelopmentConfig

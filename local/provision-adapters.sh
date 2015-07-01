@@ -4,6 +4,9 @@ source "/home/vagrant/.rvm/scripts/rvm"
 echo "- - - Gems will install without docs for this environment - - -"
 echo "gem: --no-rdoc --no-ri" > ~/.gemrc
 
+#make sure RVM gets run when starting a
+echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"' >> ~/.bash_profile
+
 echo "- - - Enabling gem globalcache..."
 rvm gemset globalcache enable
 
@@ -19,7 +22,7 @@ sudo chown -R vagrant /home/vagrant/.gem
 
 echo "- - - Installing Bundler in JRuby - - -"
 rvm use jruby-1.7.19
-gem install bundler --no-rdoc --no-ri 
+gem install bundler --no-rdoc --no-ri
 
 echo "- - - Installing Bundler in Ruby - - -"
 rvm use ruby-1.9.3

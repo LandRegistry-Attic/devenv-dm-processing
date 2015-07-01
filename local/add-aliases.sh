@@ -1,0 +1,5 @@
+alias status="sudo supervisorctl status"
+alias stop="sudo supervisorctl stop"
+alias start="sudo supervisorctl start"
+alias restart="sudo supervisorctl restart"
+alias reload="sudo supervisorctl reload"

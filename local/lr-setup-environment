@@ -82,6 +82,12 @@ sudo chown -R vagrant:vagrant /etc/supervisord.d/
 echo "- - - Configuring applications - - -"
 sudo su vagrant -c /vagrant/local/lr-setup-apps
 
+#install and configure virtualenvwrapper
+pip install virtualenvwrapper
+source /usr/bin/virtualenvwrapper.sh
+echo "source /usr/bin/virtualenvwrapper.sh" >> ${HOME}/.bash_profile
+echo "export WORKON_HOME=$WORKON_HOME" >>  ${HOME}/.bash_profile
+
 # Load supervisor config and start applications
 echo "- - - Starting services - - -"
 sudo supervisorctl reload >/dev/null
@@ -102,3 +108,6 @@ for script in $provision_scripts
 do
 	bash $script
 done
+
+#add helpful aliases
+source /vagrant/local/add-aliases.sh

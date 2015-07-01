@@ -1,6 +1,6 @@
 # Configuration file for {{ name }}
 
-[program:{{ name }}-web]
+[program:{{ name }}]
 autostart=true
 autorestart=true
 stopsignal=QUIT
@@ -24,6 +24,3 @@ environment=PATH="{{ venv }}/bin",
 {%- if conf['port'] -%}
 PORT={{ conf['port'] }}
 {% endif %}
-
-[group:{{ name }}]
-programs={{ name }}-web
