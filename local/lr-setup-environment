@@ -54,7 +54,7 @@ echo "- - - installing phantomjs - - -"
 
 #install bundler
 echo "- - - Installing bundler - - -"
-gem install bundler
+gem install bundler --no-rdoc --no-ri
 
 #install postgresql
 gem install --no-ri --no-rdoc puppet:3.7.5

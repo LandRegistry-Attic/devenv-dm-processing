@@ -19,11 +19,11 @@ sudo chown -R vagrant /home/vagrant/.gem
 
 echo "- - - Installing Bundler in JRuby - - -"
 rvm use jruby-1.7.19
-gem install bundler
+gem install bundler --no-rdoc --no-ri 
 
 echo "- - - Installing Bundler in Ruby - - -"
 rvm use ruby-1.9.3
-gem install bundler
+gem install bundler --no-rdoc --no-ri
 
 echo "- - - Switch back to JRuby - - -"
 rvm use jruby-1.7.19

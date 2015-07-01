@@ -47,6 +47,7 @@ postgresql::server::db { 'workingregister':
 
 postgresql::server::db { 'registermetadata':
   user     => 'vagrant',
+  password => 'vagrant',
 }
 
 postgresql::server::role { 'vagrant':
