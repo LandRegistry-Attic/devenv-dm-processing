@@ -16,6 +16,26 @@ Requirements:
 
 Inside the project folder, simply run `vagrant up` and then connect to your projects on the ports defined in `configuration.yaml`
 
+## Useful commands
+
+All the apps are run by supervisord, here are some helpful aliases for supervisorctl.
+```
+status                - view running status of all apps (via supervisorctl)
+stop {name of app}    - stop app running in supervisord
+start {name of app}   - start app running in supervisord
+restart {name of app} - restart app running in supervisord
+reload                - reload supervisord config and restart all apps
+```
+To run the app in the terminal (i.e. not via supervisord, so you can directly see the output)
+```
+lr-run {name of app}
+```
+
+To quickly view the logs of an app
+```
+lr-log {name of app}
+```
+
 ## Apps
 ### [Cases API:](https://github.com/LandRegistry/cases-api)
 
