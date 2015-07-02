@@ -86,7 +86,7 @@ sudo su vagrant -c /vagrant/local/lr-setup-apps
 pip install virtualenvwrapper
 source /usr/bin/virtualenvwrapper.sh
 echo "source /usr/bin/virtualenvwrapper.sh" >> ${HOME}/.bash_profile
-echo "export WORKON_HOME=$WORKON_HOME" >>  ${HOME}/.bash_profile
+echo "export WORKON_HOME=/tmp/.venv" >>  ${HOME}/.bash_profile
 
 # Load supervisor config and start applications
 echo "- - - Starting services - - -"

@@ -7,6 +7,7 @@
       branch: master
       port: 5001
       entrypoint: application:app
+      apptype: wsgi
       vars:
 
     cases-frontend:
@@ -14,6 +15,7 @@
       branch: master
       port: 5002
       entrypoint: application:app
+      apptype: wsgi
       vars:
         SETTINGS: config.DevelopmentConfig
 
@@ -22,6 +24,7 @@
       branch: master
       port: 5003
       entrypoint: application:app
+      apptype: wsgi
       vars:
 
     update-register:
@@ -29,6 +32,7 @@
       branch: master
       port: 5004
       entrypoint: application.routes:app
+      apptype: wsgi
       vars:
         SETTINGS: config.DevelopmentConfig
 
@@ -37,6 +41,7 @@
       branch: master
       port: 5005
       entrypoint: application:app
+      apptype: wsgi
       vars:
 
     auto-process-charge:
@@ -44,5 +49,27 @@
       branch: master
       port: 5006
       entrypoint: application:app
+      apptype: wsgi
       vars:
         SETTINGS: config.DevelopmentConfig
+
+    daylist-adapter:
+      repo: git@git.lr.net:casework/daylist-adapter.git
+      branch: master
+      port: 8888
+      apptype: torquebox
+      vars:
+
+    titles-adapter:
+      repo: git@git.lr.net:casework/titles-adapter.git
+      branch: master
+      port: 8888
+      apptype: torquebox
+      vars:
+
+    migrate-metadata:
+      repo: git@git.lr.net:casework/migrate-metadata.git
+      branch: master
+      port:
+      apptype: jruby
+      vars:

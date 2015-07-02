@@ -70,6 +70,15 @@ def pythonSetup(name,path):
 
     return venv
 
+def rubySetup(name, path):
+    # Install Ruby libraries
+    if os.path.exists(path + '/Gemfile'):
+        say(name,'Installing dependencies')
+        subprocess.check_output(['bundle', 'install', '--gemfile=' + path + '/Gemfile'])
+    else:
+        say(name,'No Gemfile found. Assuming no dependencies')
+
+
 # This is a bit nasty at the moment, it just returns a template environment which
 # can be used to load templates from /vagrant/local
 def supervisorTemplate():
@@ -96,23 +105,36 @@ def setup(name,conf,template):
         path = paths['apps'] + '/' + name
 
     ini = '%s/%s.ini' % (paths['supervisor'],name)
-    # For now, we'll just assume everything is a flask application:
-    appType = 'wsgi'
 
-    if appType == 'wsgi':
+    # Create log directory
+    logpath = '/vagrant/logs/' + name
+    if not os.path.exists(logpath):
+        os.makedirs(logpath)
+
+    if conf['apptype'] == 'wsgi':
         venv = pythonSetup(name,path)
         # Gunicorn is necessary for all WSGI services so it needs to be installed,
         # whether it is in the requirements file or not
         subprocess.check_output([venv + '/bin/pip', 'install', 'gunicorn'])
-        # Create log directory
-        logpath = '/vagrant/logs/' + name
-        if not os.path.exists(logpath):
-            os.makedirs(logpath)
+
         # Setup supervisor configuration file
         supervisor = template.get_template('.wsgi.ini.j2')
         f = open(ini,'w')
         f.write(supervisor.render(name=name,path=path,venv=venv,conf=conf))
         f.close
+    elif conf['apptype'] == 'torquebox':
+        rubySetup(name,path)
+        # Setup supervisor configuration file
+        supervisor = template.get_template('.torquebox.ini.j2')
+
+        torqueboxini = '%s/torquebox.ini' % (paths['supervisor'])
+
+        f = open(torqueboxini,'w')
+        f.write(supervisor.render(name=name,path=path,conf=conf))
+        f.close
+
+
+
 
 
 # Main runtime
