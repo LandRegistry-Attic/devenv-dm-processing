@@ -110,4 +110,4 @@ do
 done
 
 #add helpful aliases
-source /vagrant/local/add-aliases.sh
+echo "source /vagrant/local/add-aliases.sh" >> ${HOME}/.bash_profile
