@@ -25,6 +25,7 @@ stop {name of app}    - stop app running in supervisord
 start {name of app}   - start app running in supervisord
 restart {name of app} - restart app running in supervisord
 reload                - reload supervisord config and restart all apps
+startsup              - start supervisord (needed after a vagrant halt/vagrant up)
 ```
 To run the app in the terminal (i.e. not via supervisord, so you can directly see the output)
 ```

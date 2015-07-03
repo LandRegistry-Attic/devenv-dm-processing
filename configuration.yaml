@@ -70,6 +70,5 @@
     migrate-metadata:
       repo: git@git.lr.net:casework/migrate-metadata.git
       branch: master
-      port:
-      apptype: jruby
+      apptype: jruby script
       vars:
