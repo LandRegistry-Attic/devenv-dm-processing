@@ -50,21 +50,43 @@ lr-log {name of app}
 - `/cases`
 - `/cases/<casenumber>`
 
+### [Register Metadata](https://github.com/LandRegistry/register-metadata)
+
+`localhost:5003`
+- **GET** `/mdref/<md_ref>`
+
+### [Update Register](https://github.com/LandRegistry/update-register)
+
+`localhost:5004`
+- **POST** `/titles` - Add whole working register.
+- **GET** `/titles/<title_number>` - Get whole working register.
+- **POST** `/titles/<title_number>/groups/<group_position>/entries/<entry_position>` - Amend an individual entry.
+- **PUT** `/titles/<title_number>/groups/<group_position>/entries/` - Insert an entry.
+- **DELETE** `/titles/<title_number>/groups/<group_position>/entries/<entry_position>` - Delete an entry.
+- **GET** `/entrystructure/` - Get entry structure.
+- **PUT** `/titles/<title_number>/groups` - Insert a group.
+- **DELETE** `/titles/<title_number>/groups/<group_position>` - Delete a group.
+- **POST** `/titles/<title_number>/groups/<group_position>` - Amend a group.
+
 ### [Titles API:](https://github.com/LandRegistry/titles-api)
 
 `localhost:5005`
-- **GET** `/validate/<titlenumber>`
+- **GET** `/validate/<title_number>`
+
+### [Auto Process Charge](https://github.com/LandRegistry/auto-process-charge)
+
+`localhost:5006`
+- **POST** `/process/`
 
 ### [Daylist Adapter:](http://git.lr.net/casework/daylist-adapter)
 
 `localhost:8888/DaylistAdapter`
-- **POST** `/cases/<titlenumber>`
+- **POST** `/cases/<title_number>`
 
 ### [Titles Adapter:](http://git.lr.net/casework/titles-adapter)
 
 `localhost:8888/TitlesAdapter`
-- **POST** `/titles/<titlenumber>`
-
+- **POST** `/titles/<title_number>`
 
 ## Notes
 The development environment relies on [Vagrant](https://www.vagrantup.com/).
