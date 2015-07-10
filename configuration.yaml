@@ -81,3 +81,13 @@
       apptype: wsgi
       vars:
         SETTINGS: config.DevelopmentConfig
+
+
+    register-publisher:
+      repo: https://github.com/LandRegistry/register-publisher.git
+      branch: master
+      port: 5008
+      entrypoint: application.routes:app
+      apptype: wsgi
+      vars:
+        SETTINGS: config.DevelopmentConfig
