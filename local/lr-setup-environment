@@ -78,6 +78,12 @@ sudo systemctl start supervisord >/dev/null 2>&1
 sudo systemctl enable supervisord >/dev/null 2>&1
 sudo chown -R vagrant:vagrant /etc/supervisord.d/
 
+# install MQ stuff
+puppet module install garethr-erlang
+puppet apply /vagrant/manifests/erlang.pp
+puppet module install puppetlabs-rabbitmq
+puppet apply /vagrant/manifests/rabbit.pp
+
 # Set up applications
 echo "- - - Configuring applications - - -"
 sudo su vagrant -c /vagrant/local/lr-setup-apps

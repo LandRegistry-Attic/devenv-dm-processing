@@ -83,3 +83,21 @@ postgresql::server::database_grant { 'grant root access to register metadata':
   db        => 'registermetadata',
   role      => 'root',
 }
+
+postgresql::server::db { 'currentregister':
+  user     => 'currentregister',
+  password => 'currentregister',
+}
+
+postgresql::server::database_grant { 'grant vagrant access to current register':
+  privilege => 'ALL',
+  db        => 'currentregister',
+  role      => 'vagrant',
+}
+
+postgresql::server::database_grant { 'grant root access to current register':
+  privilege => 'ALL',
+  db        => 'currentregister',
+  role      => 'root',
+}
+
