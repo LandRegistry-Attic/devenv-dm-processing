@@ -72,3 +72,12 @@
       branch: master
       apptype: jruby script
       vars:
+
+    current-register-api:
+      repo: https://github.com/LandRegistry/current-register-api.git
+      branch: master
+      port: 5007
+      entrypoint: application.routes:app
+      apptype: wsgi
+      vars:
+        SETTINGS: config.DevelopmentConfig
