@@ -1,16 +1,16 @@
-# Configuration file for torquebox
+# A generic onfiguration file for any type of app
 
-[program:torquebox]
+[program:{{ name }}]
 autostart=true
 autorestart=true
 stopsignal=QUIT
-stdout_logfile=/vagrant/logs/torquebox/output.log
-stderr_logfile=/vagrant/logs/torquebox/error.log
+stdout_logfile=/vagrant/logs/{{ name }}/output.log
+stderr_logfile=/vagrant/logs/{{ name }}/error.log
 stdout_logfile_maxbytes=8192
 stderr_logfile_maxbytes=8192
 user=vagrant
 directory=/home/vagrant
-command=/home/vagrant/.rvm/bin/rvm-exec jruby-1.7.19 torquebox run -p 8888
+command={{ conf['entrypoint'] }}
 environment=
 {%- if conf['vars'] -%}
   {%- for key,value in conf['vars'].items() -%}

@@ -82,12 +82,18 @@
       vars:
         SETTINGS: config.DevelopmentConfig
 
-
     register-publisher:
       repo: https://github.com/LandRegistry/register-publisher.git
       branch: master
-      port: 5008
-      entrypoint: application.routes:app
-      apptype: wsgi
+      entrypoint: /tmp/.venv/register-publisher/bin/python /vagrant/apps/register-publisher/run.py
+      apptype: genericpython
+      vars:
+        SETTINGS: config.DevelopmentConfig
+
+    current-register-feeder:
+      repo: https://github.com/LandRegistry/current-register-feeder.git
+      branch: master
+      entrypoint: /tmp/.venv/current-register-feeder/bin/python /vagrant/apps/current-register-feeder/run.py
+      apptype: genericpython
       vars:
         SETTINGS: config.DevelopmentConfig

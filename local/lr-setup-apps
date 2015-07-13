@@ -29,6 +29,8 @@ def gitSetup(name,repo,branch):
         # Fresh clone
         git.Repo.clone_from(repo,path)
         repo = git.Repo(path)
+
+        subprocess.check_output(['git', 'submodule', 'update', '--init'], cwd=path)
     else:
         # Fetch latest upstream for an existing repo
         repo = git.Repo(path)
@@ -132,8 +134,13 @@ def setup(name,conf,template):
         f = open(torqueboxini,'w')
         f.write(supervisor.render(name=name,path=path,conf=conf))
         f.close
+    elif conf['apptype'] == 'genericpython':
+        venv = pythonSetup(name,path)
 
-
+        supervisor = template.get_template('.genericpython.ini.j2')
+        f = open(ini,'w')
+        f.write(supervisor.render(name=name,path=path,conf=conf))
+        f.close
 
 
 

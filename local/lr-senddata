@@ -1,0 +1,1 @@
+rabbitmqadmin publish exchange=amq.topic routing_key=system_of_record payload="{"title_number":"BD161889"}"
