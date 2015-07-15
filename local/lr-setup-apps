@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Setup Flask applications from git repositories using configuration.yaml
+# Setup applications from git repositories using configuration.yaml
 
 import os
 import sys
@@ -36,6 +36,7 @@ def gitSetup(name,repo,branch):
         repo = git.Repo(path)
         try:
             repo.remotes['origin'].fetch()
+            subprocess.check_output(['git', 'submodule', 'update', '--init'], cwd=path)
         except AssertionError:
             say(name,'Unable to fetch latest code as there are conflicts. Run git fetch automatically')
 
@@ -125,7 +126,13 @@ def setup(name,conf,template):
         f.write(supervisor.render(name=name,path=path,venv=venv,conf=conf))
         f.close
     elif conf['apptype'] == 'torquebox':
+        torquebox_logpath = '/vagrant/logs/torquebox'
+        if not os.path.exists(torquebox_logpath):
+            os.makedirs(torquebox_logpath)
+
         rubySetup(name,path)
+
+        subprocess.check_output(['torquebox', 'deploy'], cwd=path)
         # Setup supervisor configuration file
         supervisor = template.get_template('.torquebox.ini.j2')
 
@@ -160,7 +167,8 @@ if __name__ == '__main__':
 
     # Setup and configure applications IN PARALLEL ;-)
     for app,conf in config['applications'].iteritems():
-            proc = multiprocessing.Process(target=setup,args=(app,conf,template))
-            proc.start()
+        setup(app, conf, template)
+            # proc = multiprocessing.Process(target=setup,args=(app,conf,template))
+            # proc.start()
 
 # Fin

@@ -30,17 +30,3 @@ gem install bundler --no-rdoc --no-ri
 
 echo "- - - Switch back to JRuby - - -"
 rvm use jruby-1.7.19
-
-echo "- - - Attempting to setup Daylist Adapter - - -"
-cd /vagrant/apps/
-if [ ! -d /vagrant/apps/daylist-adapter/ ];
-then (git clone git@git.lr.net:casework/daylist-adapter.git && cd /vagrant/apps/daylist-adapter/ && bundle install && torquebox deploy && echo "- - - Successfully setup Daylist Adapter - - -") || echo "- - - Can't install daylist adapter off-DITI - --"
-else cd /vagrant/apps/daylist-adapter/ && bundle install && torquebox deploy && echo "- - - Successfully setup Daylist Adapter - - -"
-fi
-
-echo "- - - Attempting to setup Titles Adapter - - -"
-cd /vagrant/apps/
-if [ ! -d /vagrant/apps/titles-adapter/ ];
-then (git clone git@git.lr.net:casework/titles-adapter.git && cd /vagrant/apps/titles-adapter/ && bundle install && torquebox deploy && echo "- - - Successfully setup Titles Adapter - - -") || echo "- - - Can't install titles adapter off-DITI - --"
-else cd /vagrant/apps/titles-adapter/ && bundle install && torquebox deploy && echo "- - - Successfully setup Titles Adapter - - -"
-fi

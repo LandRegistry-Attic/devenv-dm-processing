@@ -57,6 +57,7 @@ echo "- - - Installing bundler - - -"
 gem install bundler --no-rdoc --no-ri
 
 #install postgresql
+echo "- - - Installing Postgres - - -"
 gem install --no-ri --no-rdoc puppet:3.7.5
 puppet module install puppetlabs-apt --version "<2.0.0"
 puppet module install puppetlabs-postgresql
@@ -79,31 +80,27 @@ sudo systemctl enable supervisord >/dev/null 2>&1
 sudo chown -R vagrant:vagrant /etc/supervisord.d/
 
 # install MQ stuff
+echo "- - - Installing Erland and RabbitMQ - - -"
 puppet module install garethr-erlang
 puppet apply /vagrant/manifests/erlang.pp
 puppet module install puppetlabs-rabbitmq
 puppet apply /vagrant/manifests/rabbit.pp
 
-# Set up applications
-echo "- - - Configuring applications - - -"
-sudo su vagrant -c /vagrant/local/lr-setup-apps
-
 #install and configure virtualenvwrapper
+echo "- - - Installing VirtualEnvWrapper - - -"
 pip install virtualenvwrapper
 source /usr/bin/virtualenvwrapper.sh
 echo "source /usr/bin/virtualenvwrapper.sh" >> ${HOME}/.bash_profile
 echo "export WORKON_HOME=/tmp/.venv" >>  ${HOME}/.bash_profile
 
-# Load supervisor config and start applications
-echo "- - - Starting services - - -"
-sudo supervisorctl reload >/dev/null
-
 yum install -y git
 
+echo "- - - Installing Java JDK 1.7.0 - - -"
 yum install -y java-1.7.0-openjdk-devel
 
 wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
 
+echo "- - - Installing Maven - - -"
 yum install -y apache-maven
 
 sudo -i -u vagrant source /vagrant/local/provision-adapters.sh
@@ -117,3 +114,11 @@ done
 
 #add helpful aliases
 echo "source /vagrant/local/add-aliases.sh" >> ${HOME}/.bash_profile
+
+# Set up applications
+echo "- - - Configuring applications - - -"
+sudo su vagrant -c /vagrant/local/lr-setup-apps
+
+# Load supervisor config and start applications
+echo "- - - Starting services - - -"
+sudo supervisorctl reload >/dev/null

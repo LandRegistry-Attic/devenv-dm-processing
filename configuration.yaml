@@ -3,7 +3,7 @@
   applications:
 
     cases-api:
-      repo: https://github.com/LandRegistry/cases-api.git
+      repo: git@github.com:LandRegistry/cases-api.git
       branch: master
       port: 5001
       entrypoint: application:app
@@ -91,7 +91,7 @@
         SETTINGS: config.DevelopmentConfig
 
     current-register-feeder:
-      repo: https://github.com/LandRegistry/current-register-feeder.git
+      repo: git@github.com:LandRegistry/current-register-api.git
       branch: master
       entrypoint: /tmp/.venv/current-register-feeder/bin/python /vagrant/apps/current-register-feeder/run.py
       apptype: genericpython
