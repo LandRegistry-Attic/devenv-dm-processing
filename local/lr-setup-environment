@@ -42,15 +42,15 @@ sudo yum -y install gcc gcc-c++ make flex bison gperf ruby \
 
 #install phantomjs
 echo "- - - installing phantomjs - - -"
-  cd ~
-  export PHANTOM_JS="phantomjs-1.9.7-linux-x86_64"
-  wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
-  mv $PHANTOM_JS.tar.bz2 /usr/local/share/
-  cd /usr/local/share/
-  tar xvjf $PHANTOM_JS.tar.bz2
-  ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/share/phantomjs
-  ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin/phantomjs
-  ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/bin/phantomjs
+cd ~
+export PHANTOM_JS="phantomjs-1.9.7-linux-x86_64"
+wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
+mv $PHANTOM_JS.tar.bz2 /usr/local/share/
+cd /usr/local/share/
+tar xvjf $PHANTOM_JS.tar.bz2
+ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/share/phantomjs
+ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin/phantomjs
+ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/bin/phantomjs
 
 #install bundler
 echo "- - - Installing bundler - - -"
@@ -73,11 +73,6 @@ fi
 # TEMP
 sudo yum install -y gcc -q
 sudo systemctl stop firewalld
-
-# Bodge together a supervisor config
-sudo systemctl start supervisord >/dev/null 2>&1
-sudo systemctl enable supervisord >/dev/null 2>&1
-sudo chown -R vagrant:vagrant /etc/supervisord.d/
 
 # install MQ stuff
 echo "- - - Installing Erland and RabbitMQ - - -"
@@ -114,6 +109,11 @@ done
 
 #add helpful aliases
 echo "source /vagrant/local/add-aliases.sh" >> ${HOME}/.bash_profile
+
+# Put together a supervisor config
+sudo systemctl start supervisord >/dev/null 2>&1
+sudo systemctl enable supervisord >/dev/null 2>&1
+sudo chown -R vagrant:vagrant /etc/supervisord.d/
 
 # Set up applications
 echo "- - - Configuring applications - - -"

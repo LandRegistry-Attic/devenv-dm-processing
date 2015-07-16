@@ -77,7 +77,7 @@ def rubySetup(name, path):
     # Install Ruby libraries
     if os.path.exists(path + '/Gemfile'):
         say(name,'Installing dependencies')
-        subprocess.check_output(['bundle', 'install', '--gemfile=' + path + '/Gemfile'])
+        subprocess.check_output(['bundle', 'install'], cwd=path)
     else:
         say(name,'No Gemfile found. Assuming no dependencies')
 
@@ -120,7 +120,7 @@ def setup(name,conf,template):
         # whether it is in the requirements file or not
         subprocess.check_output([venv + '/bin/pip', 'install', 'gunicorn'])
 
-        # Setup supervisor configuration file
+        #Setup supervisor configuration file
         supervisor = template.get_template('.wsgi.ini.j2')
         f = open(ini,'w')
         f.write(supervisor.render(name=name,path=path,venv=venv,conf=conf))
