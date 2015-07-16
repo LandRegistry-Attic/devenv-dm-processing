@@ -11,7 +11,7 @@
       vars:
 
     cases-frontend:
-      repo: https://github.com/LandRegistry/cases-frontend.git
+      repo: git@github.com:LandRegistry/cases-frontend.git
       branch: master
       port: 5002
       entrypoint: application:app
@@ -20,7 +20,7 @@
         SETTINGS: config.DevelopmentConfig
 
     register-metadata:
-      repo: https://github.com/LandRegistry/register-metadata.git
+      repo: git@github.com:LandRegistry/register-metadata.git
       branch: master
       port: 5003
       entrypoint: application:app
@@ -28,7 +28,7 @@
       vars:
 
     update-register:
-      repo: https://github.com/LandRegistry/update-register.git
+      repo: git@github.com:LandRegistry/update-register.git
       branch: master
       port: 5004
       entrypoint: application.routes:app
@@ -37,7 +37,7 @@
         SETTINGS: config.DevelopmentConfig
 
     titles-api:
-      repo: https://github.com/LandRegistry/titles-api.git
+      repo: git@github.com:LandRegistry/titles-api.git
       branch: master
       port: 5005
       entrypoint: application:app
@@ -45,7 +45,7 @@
       vars:
 
     auto-process-charge:
-      repo: https://github.com/LandRegistry/auto-process-charge.git
+      repo: git@github.com:LandRegistry/auto-process-charge.git
       branch: master
       port: 5006
       entrypoint: application:app
@@ -74,7 +74,7 @@
       vars:
 
     current-register-api:
-      repo: https://github.com/LandRegistry/current-register-api.git
+      repo: git@github.com:LandRegistry/current-register-api.git
       branch: master
       port: 5007
       entrypoint: application.routes:app
@@ -83,7 +83,7 @@
         SETTINGS: config.DevelopmentConfig
 
     register-publisher:
-      repo: https://github.com/LandRegistry/register-publisher.git
+      repo: git@github.com:LandRegistry/register-publisher.git
       branch: master
       entrypoint: /tmp/.venv/register-publisher/bin/python /vagrant/apps/register-publisher/run.py
       apptype: genericpython
