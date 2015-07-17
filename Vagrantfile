@@ -24,23 +24,18 @@ Vagrant.configure(2) do |node|
           github_ssh_key = File.read(File.join(Dir.home, ".ssh", "github_rsa"))
 
           # Copy it to VM as the /root/.ssh/github_rsa and to /home/vagrant/.ssh/gitlab_rsa
-          node.vm.provision :shell, :inline => "echo 'Windows-specific: Copying local GitHub SSH Key to VM for provisioning...' && mkdir -p /root/.ssh && echo '#{github_ssh_key}' > /root/.ssh/github_rsa && chmod 600 /root/.ssh/github_rsa"
-          node.vm.provision :shell, :inline => "echo 'Windows-specific: Copying local GitHub SSH Key to VM for provisioning...' && mkdir -p /home/vagrant/.ssh && echo '#{github_ssh_key}' > /home/vagrant/.ssh/github_rsa && chmod 600 /home/vagrant/.ssh/github_rsa"
+          node.vm.provision :shell, :inline => "echo 'Windows-specific: Copying local GitHub SSH Key to VM for provisioning...' && mkdir -p /home/vagrant/.ssh && echo '#{github_ssh_key}' > /home/vagrant/.ssh/github_rsa && chmod 600 /home/vagrant/.ssh/github_rsa && chown vagrant:vagrant -R /home/vagrant/.ssh/"
           # Change to use port 443 for github
-          node.vm.provision :shell, :inline => "echo 'Host github.com \n Hostname ssh.github.com \n StrictHostKeyChecking no \n Port 443' > /home/vagrant/.ssh/config"
-          node.vm.provision :shell, :inline => "echo 'Host github.com \n Hostname ssh.github.com \n StrictHostKeyChecking no \n Port 443' > /root/.ssh/config"
+          node.vm.provision :shell, :inline => "echo 'Host github.com \n Hostname ssh.github.com \n StrictHostKeyChecking no \n Port 443 \n IdentityFile /home/vagrant/.ssh/github_rsa' > /home/vagrant/.ssh/config"
       end
 
       if File.exists?(File.join(Dir.home, ".ssh", "gitlab_rsa"))
           # Read local machine's Gitlab SSH Key
           gitlab_ssh_key = File.read(File.join(Dir.home, ".ssh", "gitlab_rsa"))
 
-          # Copy it to VM as the /root/.ssh/gitlab_rsa and to /home/vagrant/.ssh/gitlab_rsa
-          node.vm.provision :shell, :inline => "echo 'Windows-specific: Copying local Gitlab SSH Key to VM for provisioning...' && mkdir -p /root/.ssh && echo '#{gitlab_ssh_key}' > /root/.ssh/gitlab_rsa && chmod 600 /root/.ssh/gitlab_rsa"
-          node.vm.provision :shell, :inline => "echo 'Windows-specific: Copying local Gitlab SSH Key to VM for provisioning...' && mkdir -p /home/vagrant/.ssh && echo '#{gitlab_ssh_key}' > /home/vagrant/.ssh/gitlab_rsa && chmod 600 /home/vagrant/.ssh/gitlab_rsa"
-          # Change to use port 443 for github
-          node.vm.provision :shell, :inline => "echo 'Host git.lr.net \n Hostname git.lr.net \n StrictHostKeyChecking no \n' >> /home/vagrant/.ssh/config"
-          node.vm.provision :shell, :inline => "echo 'Host git.lr.net \n Hostname git.lr.net \n StrictHostKeyChecking no \n' >> /root/.ssh/config"
+          # Copy it to /home/vagrant/.ssh/gitlab_rsa
+          node.vm.provision :shell, :inline => "echo 'Windows-specific: Copying local Gitlab SSH Key to VM for provisioning...' && mkdir -p /home/vagrant/.ssh && echo '#{gitlab_ssh_key}' > /home/vagrant/.ssh/gitlab_rsa && chmod 600 /home/vagrant/.ssh/gitlab_rsa && chown vagrant:vagrant -R /home/vagrant/.ssh/"
+          node.vm.provision :shell, :inline => "echo 'Host git.lr.net \n Hostname git.lr.net \n StrictHostKeyChecking no \n IdentityFile /home/vagrant/.ssh/gitlab_rsa' >> /home/vagrant/.ssh/config"
       end
   end
 
@@ -53,5 +48,5 @@ Vagrant.configure(2) do |node|
   end
 
   # Run script to configure environment
-  node.vm.provision "shell", path: "local/lr-setup-environment"
+  node.vm.provision :shell, :inline => "source /vagrant/local/lr-setup-environment"
 end
