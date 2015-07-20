@@ -93,7 +93,7 @@
     current-register-feeder:
       repo: git@github.com:LandRegistry/current-register-feeder.git
       branch: master
-      entrypoint: /tmp/.venv/current-register-feeder/bin/python /vagrant/apps/current-register-feeder/run.py
+      entrypoint: /tmp/.venv/current-register-feeder/bin/python /vagrant/apps/current-register-feeder/run.sh
       apptype: genericpython
       vars:
         SETTINGS: config.DevelopmentConfig
