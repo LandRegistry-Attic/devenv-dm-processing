@@ -45,6 +45,8 @@ Vagrant.configure(2) do |node|
       port = conf['port'].to_i
       node.vm.network :forwarded_port, guest: port, host: port
     end
+
+    node.vm.network :forwarded_port, guest: 5432, host: 15432
   end
 
   # Run script to configure environment
