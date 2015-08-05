@@ -3,10 +3,10 @@
 sudo supervisorctl stop $1 2>&1 >/dev/null
 
 # check if app has virtualenv, if so activate it
-if [ -f "/tmp/.venv/$1/bin/activate" ]
+if [ -f "/home/vagrant/.venv/$1/bin/activate" ]
 then
   echo "Python app found, activating virtualenv..."
-	source /tmp/.venv/$1/bin/activate
+	source /home/vagrant/.venv/$1/bin/activate
 fi
 
 # check if app has run.sh, and execute it if it does

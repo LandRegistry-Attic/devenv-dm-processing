@@ -85,7 +85,7 @@
     register-publisher:
       repo: git@github.com:LandRegistry/register-publisher.git
       branch: master
-      entrypoint: /tmp/.venv/register-publisher/bin/python /vagrant/apps/register-publisher/run.py
+      entrypoint: /home/vagrant/.venv/register-publisher/bin/python /vagrant/apps/register-publisher/run.py
       apptype: genericpython
       vars:
         SETTINGS: config.DevelopmentConfig
@@ -93,7 +93,7 @@
     current-register-feeder:
       repo: git@github.com:LandRegistry/current-register-feeder.git
       branch: master
-      entrypoint: /usr/bin/bash /vagrant/apps/current-register-feeder/run.sh
+      entrypoint: /home/vagrant/.venv/current-register-feeder/bin/python /vagrant/apps/current-register-feeder/run.py
       apptype: genericpython
       vars:
         SETTINGS: config.DevelopmentConfig
