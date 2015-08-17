@@ -67,6 +67,13 @@
       apptype: torquebox
       vars:
 
+    register-adapter:
+      repo: git@git.lr.net:casework/register-adapter.git
+      branch: master
+      port: 8888
+      apptype: torquebox
+      vars:        
+
     migrate-metadata:
       repo: git@git.lr.net:casework/migrate-metadata.git
       branch: master
