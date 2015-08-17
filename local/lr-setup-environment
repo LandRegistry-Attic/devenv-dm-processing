@@ -90,7 +90,7 @@ echo "- - - Installing VirtualEnvWrapper - - -"
 pip install virtualenvwrapper
 source /usr/bin/virtualenvwrapper.sh
 echo "source /usr/bin/virtualenvwrapper.sh" >> ${HOME}/.bash_profile
-echo "export WORKON_HOME=/tmp/.venv" >>  ${HOME}/.bash_profile
+echo "export WORKON_HOME=/home/vagrant/.venv/" >>  ${HOME}/.bash_profile
 
 yum install -y git
 

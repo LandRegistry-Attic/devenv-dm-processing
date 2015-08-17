@@ -54,7 +54,7 @@ Vagrant.configure(2) do |node|
 
   node.vm.provider :virtualbox do |vb|
     vb.name = "landregistry-development"
-    vb.customize ['modifyvm', :id, '--memory', ENV['VM_MEMORY'] || 3072]
+    vb.customize ['modifyvm', :id, '--memory', ENV['VM_MEMORY'] || 4096]
     vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
     vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
     vb.customize ["modifyvm", :id, "--cpus", ENV['VM_CPUS'] || 4]
