@@ -11,7 +11,7 @@
       vars:
 
     cases-frontend:
-      repo: git@github.com:LandRegistry/cases-frontend.git
+      repo: git@git.lr.net:casework/cases-frontend.git
       branch: master
       port: 5002
       entrypoint: application:app
@@ -73,7 +73,7 @@
       branch: master
       port: 8888
       apptype: torquebox
-      vars:        
+      vars:
 
     migrate-metadata:
       repo: git@git.lr.net:casework/migrate-metadata.git
