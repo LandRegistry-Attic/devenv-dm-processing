@@ -13,6 +13,7 @@ Vagrant.configure(2) do |node|
   node.vm.box_version      = "0.1.1"
   node.vm.box_check_update = true
   node.ssh.forward_agent = true
+  # node.ssh.pty = false
 
   # Prevent annoying "stdin: is not a tty" errors from displaying during 'vagrant up'
   node.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
@@ -39,18 +40,19 @@ Vagrant.configure(2) do |node|
       end
   end
 
+  # No apps to configure
   # If applications have ports assigned, let's map these to the host machine
-  conf['applications'].each do |app,conf|
-    if conf.has_key?('port') && conf['port'] != ''
-      port = conf['port'].to_i
-      node.vm.network :forwarded_port, guest: port, host: port
-    end
-
-    node.vm.network :forwarded_port, guest: 5432, host: 15432
-  end
+  #conf['applications'].each do |app,conf|
+  #  if conf.has_key?('port') && conf['port'] != ''
+  #    port = conf['port'].to_i
+  #    node.vm.network :forwarded_port, guest: port, host: port
+  #  end
+  #
+  #  node.vm.network :forwarded_port, guest: 5432, host: 15432
+  #end
 
   # Run script to configure environment
-  node.vm.provision :shell, :inline => "source /vagrant/local/lr-setup-environment"
+  node.vm.provision :shell, :inline => "source /vagrant/local/lr-setup-environment.sh"
 
   node.vm.provider :virtualbox do |vb|
     vb.name = "landregistry-development"

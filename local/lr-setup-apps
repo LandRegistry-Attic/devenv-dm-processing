@@ -170,19 +170,20 @@ if __name__ == '__main__':
 
     template = supervisorTemplate()
 
-    if app_subset:
-        # Setup and configure subset of applications IN PARALLEL ;-)
-        for app,conf in config['applications'].iteritems():
-            for idx, arg in enumerate(sys.argv):
-                if idx != 0 and app == arg:
-                    proc = multiprocessing.Process(target=setup,args=(app,conf,template))
-                    proc.start()
-
-    else:
-        # Setup and configure applications IN PARALLEL ;-)
-        for app,conf in config['applications'].iteritems():
-            #setup(app, conf, template)
-            proc = multiprocessing.Process(target=setup,args=(app,conf,template))
-            proc.start()
+    # No apps to configure
+    # if app_subset:
+    #     # Setup and configure subset of applications IN PARALLEL ;-)
+    #     for app,conf in config['applications'].iteritems():
+    #         for idx, arg in enumerate(sys.argv):
+    #             if idx != 0 and app == arg:
+    #                 proc = multiprocessing.Process(target=setup,args=(app,conf,template))
+    #                 proc.start()
+    #
+    # else:
+    #     # Setup and configure applications IN PARALLEL ;-)
+    #     for app,conf in config['applications'].iteritems():
+    #         #setup(app, conf, template)
+    #         proc = multiprocessing.Process(target=setup,args=(app,conf,template))
+    #         proc.start()
 
 # Fin
