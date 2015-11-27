@@ -1,0 +1,17 @@
+[program:{{ name }}]
+autostart=true
+autorestart=true
+stopsignal=QUIT
+stdout_logfile=/vagrant/logs/{{ name }}/output.log
+stderr_logfile=/vagrant/logs/{{ name }}/error.log
+stdout_logfile_maxbytes=8192
+stderr_logfile_maxbytes=8192
+user=vagrant
+directory=/home/vagrant
+command={{ conf['run'] }}
+environment=
+{%- if conf['env'] -%}
+ {%- for key,value in conf['env'].items() -%}
+   {{ key }}="{{ value}}",
+ {%- endfor -%}
+{%- endif -%}

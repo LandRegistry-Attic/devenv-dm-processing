@@ -54,34 +54,6 @@ def gitSetup(name,repo,branch):
     return path
 
 
-# Configure Python applications
-def pythonSetup(name,path):
-    venv = paths['venv'] + '/' + name
-
-    # Create virtualenv
-    if not os.path.exists(venv):
-        os.makedirs(venv)
-        say(name,'Creating virtual environment')
-        subprocess.check_output(['/usr/bin/virtualenv', venv])
-
-    # Install Python libraries
-    if os.path.exists(path + '/requirements.txt'):
-        say(name,'Installing dependencies')
-        subprocess.check_output([venv + '/bin/pip', 'install', '-r', path + '/requirements.txt'])
-    else:
-        say(name,'No requirements file found. Assuming no dependencies')
-
-    return venv
-
-def rubySetup(name, path):
-    # Install Ruby libraries
-    if os.path.exists(path + '/Gemfile'):
-        say(name,'Installing dependencies')
-        subprocess.check_output(['bundle', 'install'], cwd=path)
-    else:
-        say(name,'No Gemfile found. Assuming no dependencies')
-
-
 # This is a bit nasty at the moment, it just returns a template environment which
 # can be used to load templates from /vagrant/local
 def supervisorTemplate():
@@ -101,11 +73,7 @@ def supervisorTemplate():
 
 # Setup applications
 def setup(name,conf,template):
-    # This is a little redundant at this point as gitSetup returns the same value
-    if 'repo' in conf:
-        path = gitSetup(name,conf['repo'],conf['branch'])
-    else:
-        path = paths['apps'] + '/' + name
+    path = gitSetup(name,conf['repo'],conf['branch'])
 
     ini = '%s/%s.ini' % (paths['supervisor'],name)
 
@@ -114,41 +82,12 @@ def setup(name,conf,template):
     if not os.path.exists(logpath):
         os.makedirs(logpath)
 
-    if conf['apptype'] == 'wsgi':
-        venv = pythonSetup(name,path)
-        # Gunicorn is necessary for all WSGI services so it needs to be installed,
-        # whether it is in the requirements file or not
-        subprocess.check_output([venv + '/bin/pip', 'install', 'gunicorn'])
+    subprocess.call(conf['build'], shell=True, stderr=subprocess.STDOUT, cwd=paths['apps'] + '/' + name )
 
-        #Setup supervisor configuration file
-        supervisor = template.get_template('.wsgi.ini.j2')
-        f = open(ini,'w')
-        f.write(supervisor.render(name=name,path=path,venv=venv,conf=conf))
-        f.close
-    elif conf['apptype'] == 'torquebox':
-        torquebox_logpath = '/vagrant/logs/torquebox'
-        if not os.path.exists(torquebox_logpath):
-            os.makedirs(torquebox_logpath)
-
-        rubySetup(name,path)
-
-        subprocess.check_output(['torquebox', 'deploy'], cwd=path)
-        # Setup supervisor configuration file
-        supervisor = template.get_template('.torquebox.ini.j2')
-
-        torqueboxini = '%s/torquebox.ini' % (paths['supervisor'])
-
-        f = open(torqueboxini,'w')
-        f.write(supervisor.render(name=name,path=path,conf=conf))
-        f.close
-    elif conf['apptype'] == 'genericpython':
-        venv = pythonSetup(name,path)
-
-        supervisor = template.get_template('.genericpython.ini.j2')
-        f = open(ini,'w')
-        f.write(supervisor.render(name=name,path=path,conf=conf))
-        f.close
-
+    #Setup supervisor configuration file
+    supervisor = template.get_template('.supervisor.ini.j2')
+    with open(ini,'w') as f:
+      f.write(supervisor.render(name=name,path=path,conf=conf))
 
 
 # Main runtime
@@ -170,20 +109,10 @@ if __name__ == '__main__':
 
     template = supervisorTemplate()
 
-    # No apps to configure
-    # if app_subset:
-    #     # Setup and configure subset of applications IN PARALLEL ;-)
-    #     for app,conf in config['applications'].iteritems():
-    #         for idx, arg in enumerate(sys.argv):
-    #             if idx != 0 and app == arg:
-    #                 proc = multiprocessing.Process(target=setup,args=(app,conf,template))
-    #                 proc.start()
-    #
-    # else:
-    #     # Setup and configure applications IN PARALLEL ;-)
-    #     for app,conf in config['applications'].iteritems():
-    #         #setup(app, conf, template)
-    #         proc = multiprocessing.Process(target=setup,args=(app,conf,template))
-    #         proc.start()
+    # Setup and configure applications IN PARALLEL ;-)
+    for app,conf in config['applications'].iteritems():
+        #setup(app, conf, template)
+        proc = multiprocessing.Process(target=setup,args=(app,conf,template))
+        proc.start()
 
 # Fin

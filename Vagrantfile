@@ -10,7 +10,7 @@ conf = YAML.load_file("#{dir}/configuration.yaml")
 
 Vagrant.configure(2) do |node|
   node.vm.box              = "landregistry/centos"
-  node.vm.box_version      = "0.1.1"
+  node.vm.box_version      = "0.3.0"
   node.vm.box_check_update = true
   node.ssh.forward_agent = true
   # node.ssh.pty = false
@@ -40,16 +40,15 @@ Vagrant.configure(2) do |node|
       end
   end
 
-  # No apps to configure
   # If applications have ports assigned, let's map these to the host machine
-  #conf['applications'].each do |app,conf|
-  #  if conf.has_key?('port') && conf['port'] != ''
-  #    port = conf['port'].to_i
-  #    node.vm.network :forwarded_port, guest: port, host: port
-  #  end
-  #
-  #  node.vm.network :forwarded_port, guest: 5432, host: 15432
-  #end
+  conf['applications'].each do |app,conf|
+    if conf.has_key?('port') && conf['port'] != ''
+      port = conf['port'].to_i
+      node.vm.network :forwarded_port, guest: port, host: port
+    end
+
+    node.vm.network :forwarded_port, guest: 5432, host: 15432
+  end
 
   # Run scripts to configure environment
   node.vm.provision :shell, :inline => "source /vagrant/local/lr-setup-environment.sh"

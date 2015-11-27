@@ -40,6 +40,7 @@ echo 'install java'
 yum -y install jdk-8u45-linux-x64.rpm
 echo `java -version`
 
+
 #add helpful aliases
 echo "source /vagrant/local/add-aliases.sh" >> ${HOME}/.bash_profile
 
