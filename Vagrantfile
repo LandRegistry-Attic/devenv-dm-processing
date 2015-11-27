@@ -51,8 +51,9 @@ Vagrant.configure(2) do |node|
   #  node.vm.network :forwarded_port, guest: 5432, host: 15432
   #end
 
-  # Run script to configure environment
+  # Run scripts to configure environment
   node.vm.provision :shell, :inline => "source /vagrant/local/lr-setup-environment.sh"
+  node.vm.provision :shell, :inline => "source /vagrant/local/lr-setup-gradle.sh"
 
   node.vm.provider :virtualbox do |vb|
     vb.name = "landregistry-development"

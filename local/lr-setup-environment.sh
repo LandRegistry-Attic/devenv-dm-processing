@@ -29,19 +29,16 @@ echo 'export PATH=$PATH:/vagrant/local' >> ${HOME}/.bash_profile
 echo "- - - Installing system dependencies - - -"
 sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-virtualenv python-jinja2 supervisor
 
-Install Java
-echo 'installing java change to opt'
+# Install Java
 cd /opt
-echo `pwd`
 
-echo 'now download java'
+echo 'downloading java'
 wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm"
 echo 'java downloaded'
 
 echo 'install java'
 yum -y install jdk-8u45-linux-x64.rpm
 echo `java -version`
-
 
 #add helpful aliases
 echo "source /vagrant/local/add-aliases.sh" >> ${HOME}/.bash_profile
