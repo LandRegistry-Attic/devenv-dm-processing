@@ -9,3 +9,10 @@
       build: source /vagrant/apps/test-fixtures-api/build.sh
       vars:
 
+    register-adapter:
+      repo: git@git.lr.net:casework/register-adapter.git
+      branch: develop
+      port: 9091
+      run: source /vagrant/apps/register-adapter/run.sh
+      build: source /vagrant/apps/register-adapter/build.sh
+      vars:
