@@ -13,6 +13,6 @@
       repo: git@git.lr.net:casework/register-adapter.git
       branch: develop
       port: 9091
-      run: source /vagrant/apps/register-adapter/run.sh
+      run: /bin/sh /vagrant/apps/register-adapter/run.sh
       build: source /vagrant/apps/register-adapter/build.sh
       vars:
