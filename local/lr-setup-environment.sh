@@ -40,6 +40,22 @@ echo 'install java'
 yum -y install jdk-8u45-linux-x64.rpm
 echo `java -version`
 
+echo 'install gradle'
+# installs to /opt/gradle
+# existing versions are not overwritten/deleted
+# seamless upgrades/downgrades
+# $GRADLE_HOME points to latest *installed* (not released)
+gradle_version=2.3
+mkdir /opt/gradle
+wget -N http://services.gradle.org/distributions/gradle-${gradle_version}-all.zip
+unzip -oq ./gradle-${gradle_version}-all.zip -d /opt/gradle
+ln -sfnv gradle-${gradle_version} /opt/gradle/latest
+printf "export GRADLE_HOME=/opt/gradle/latest\nexport PATH=\$PATH:\$GRADLE_HOME/bin" > /etc/profile.d/gradle.sh
+. /etc/profile.d/gradle.sh
+hash -r ; sync
+# check installation
+gradle -v
+
 
 #add helpful aliases
 echo "source /vagrant/local/add-aliases.sh" >> ${HOME}/.bash_profile

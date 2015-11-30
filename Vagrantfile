@@ -52,7 +52,6 @@ Vagrant.configure(2) do |node|
 
   # Run scripts to configure environment
   node.vm.provision :shell, :inline => "source /vagrant/local/lr-setup-environment.sh"
-  node.vm.provision :shell, :inline => "source /vagrant/local/lr-setup-gradle.sh"
 
   node.vm.provider :virtualbox do |vb|
     vb.name = "landregistry-development"
