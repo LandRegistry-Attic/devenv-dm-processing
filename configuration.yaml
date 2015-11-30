@@ -16,3 +16,11 @@
       run: /bin/sh /vagrant/apps/register-adapter/run.sh
       build: source /vagrant/apps/register-adapter/build.sh
       vars:
+
+    acceptance-tests:
+      repo: git@git.lr.net:casework/acceptance-tests.git
+      branch: develop
+      port: 5001
+      run: source /vagrant/apps/acceptance-tests/run.sh
+      build: source /vagrant/apps/acceptance-tests/build.sh
+      vars:
