@@ -7,7 +7,7 @@ stderr_logfile=/vagrant/logs/{{ name }}/error.log
 stdout_logfile_maxbytes=8192
 stderr_logfile_maxbytes=8192
 user=vagrant
-directory=/home/vagrant
+directory=/vagrant/apps/{{ name }}
 command={{ conf['run'] }}
 environment=
 {%- if conf['env'] -%}

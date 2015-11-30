@@ -5,7 +5,7 @@
       repo: git@git.lr.net:casework/test-fixtures-api.git
       branch: develop
       port: 9090
-      run: source /vagrant/apps/test-fixtures-api/run.sh
+      run: /bin/sh /vagrant/apps/test-fixtures-api/run.sh
       build: source /vagrant/apps/test-fixtures-api/build.sh
       vars:
 
