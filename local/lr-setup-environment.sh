@@ -56,24 +56,6 @@ hash -r ; sync
 # check installation
 gradle -v
 
-echo "- - - Installing RVM - - -"
-curl -sSL https://rvm.io/mpapis.asc | gpg --import - && \curl -sSL https://get.rvm.io | bash -s stable
-source "/home/vagrant/.rvm/scripts/rvm"
-echo "- - - Gems will install without docs for this environment - - -"
-echo "gem: --no-rdoc --no-ri" > ~/.gemrc
-
-#make sure RVM gets run when starting a
-echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"' >> ~/.bash_profile
-
-echo "- - - Enabling gem globalcache..."
-rvm gemset globalcache enable
-
-echo "- - - Installing Ruby - - -"
-sudo rvm install ruby-2.2.1
-
-echo "- - - Use Ruby - - -"
-sudo rvm use ruby-2.2.1
-
 #add helpful aliases
 echo "source /vagrant/local/add-aliases.sh" >> ${HOME}/.bash_profile
 
