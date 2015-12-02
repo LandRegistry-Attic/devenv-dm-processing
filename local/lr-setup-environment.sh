@@ -56,6 +56,8 @@ hash -r ; sync
 # check installation
 gradle -v
 
+sudo -i -u vagrant source install_rvm.sh
+
 #add helpful aliases
 echo "source /vagrant/local/add-aliases.sh" >> ${HOME}/.bash_profile
 
