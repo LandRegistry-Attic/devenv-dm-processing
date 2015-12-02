@@ -30,31 +30,36 @@ echo "- - - Installing system dependencies - - -"
 sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-virtualenv python-jinja2 supervisor
 
 # Install Java
-cd /opt
+if type -p java; then
+    echo 'Java already installed.  Destroy VM to re-install.'
+else
+    cd /opt
+    echo 'downloading java'
+    wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm" >/dev/null 2>&1
+    echo 'java downloaded'
+    echo 'install java'
+    yum -y install jdk-8u45-linux-x64.rpm
+    echo `java -version`
+fi
 
-echo 'downloading java'
-wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm" >/dev/null 2>&1
-echo 'java downloaded'
-
-echo 'install java'
-yum -y install jdk-8u45-linux-x64.rpm
-echo `java -version`
-
-echo 'install gradle'
-# installs to /opt/gradle
-# existing versions are not overwritten/deleted
-# seamless upgrades/downgrades
-# $GRADLE_HOME points to latest *installed* (not released)
-gradle_version=2.3
-mkdir /opt/gradle
-wget -N http://services.gradle.org/distributions/gradle-${gradle_version}-all.zip >/dev/null 2>&1
-unzip -oq ./gradle-${gradle_version}-all.zip -d /opt/gradle
-ln -sfnv gradle-${gradle_version} /opt/gradle/latest
-printf "export GRADLE_HOME=/opt/gradle/latest\nexport PATH=\$PATH:\$GRADLE_HOME/bin" > /etc/profile.d/gradle.sh
-. /etc/profile.d/gradle.sh
-hash -r ; sync
-# check installation
-gradle -v
+if type -p gradle; then
+    echo 'gradle already installed.  Destroy VM to re-install.'
+else
+    # installs to /opt/gradle
+    # existing versions are not overwritten/deleted
+    # seamless upgrades/downgrades
+    # $GRADLE_HOME points to latest *installed* (not released)
+    gradle_version=2.3
+    mkdir /opt/gradle
+    wget -N http://services.gradle.org/distributions/gradle-${gradle_version}-all.zip >/dev/null 2>&1
+    unzip -oq ./gradle-${gradle_version}-all.zip -d /opt/gradle
+    ln -sfnv gradle-${gradle_version} /opt/gradle/latest
+    printf "export GRADLE_HOME=/opt/gradle/latest\nexport PATH=\$PATH:\$GRADLE_HOME/bin" > /etc/profile.d/gradle.sh
+    . /etc/profile.d/gradle.sh
+    hash -r ; sync
+    # check installation
+    gradle -v
+fi
 
 sudo -i -u vagrant source install_rvm.sh
 
