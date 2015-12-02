@@ -33,7 +33,7 @@ sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-virtu
 cd /opt
 
 echo 'downloading java'
-wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm"
+wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm" >/dev/null 2>&1
 echo 'java downloaded'
 
 echo 'install java'
@@ -47,7 +47,7 @@ echo 'install gradle'
 # $GRADLE_HOME points to latest *installed* (not released)
 gradle_version=2.3
 mkdir /opt/gradle
-wget -N http://services.gradle.org/distributions/gradle-${gradle_version}-all.zip
+wget -N http://services.gradle.org/distributions/gradle-${gradle_version}-all.zip >/dev/null 2>&1
 unzip -oq ./gradle-${gradle_version}-all.zip -d /opt/gradle
 ln -sfnv gradle-${gradle_version} /opt/gradle/latest
 printf "export GRADLE_HOME=/opt/gradle/latest\nexport PATH=\$PATH:\$GRADLE_HOME/bin" > /etc/profile.d/gradle.sh
