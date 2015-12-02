@@ -17,10 +17,18 @@
       build: source /vagrant/apps/register-adapter/build.sh
       vars:
 
+    auto-process:
+      repo: git@git.lr.net:casework/auto-process.git
+      branch: develop
+      port: 5001
+      run: /bin/sh /vagrant/apps/auto-process/run_tests.sh
+      build: source /vagrant/apps/auto-process/build.sh
+      vars:
+
     acceptance-tests:
       repo: git@git.lr.net:casework/acceptance-tests.git
       branch: develop
-      port: 5001
+      port: 5002
       run: /bin/sh /vagrant/apps/acceptance-tests/run_tests.sh
       build: source /vagrant/apps/acceptance-tests/build.sh
       vars:
