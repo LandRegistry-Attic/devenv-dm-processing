@@ -16,7 +16,7 @@ fi
 echo "Enabling gem globalcache..."
 rvm gemset globalcache enable
 
-echo "Installing JRuby..."
+echo "Installing Ruby..."
 rvm install ruby-2.2.1
 
 echo "Turning off Gemfile warning..."
