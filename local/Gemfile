@@ -1,0 +1,13 @@
+source "https://rubygems.org"
+
+ruby '2.2.1'
+
+gem 'cucumber', '2.0.0'
+gem 'capybara'
+gem 'poltergeist'
+gem 'test-unit'
+gem 'rspec'
+gem 'rubocop'
+gem 'pry'
+gem 'selenium-webdriver', '2.42.0'
+gem 'phantomjs', '1.9.8.0'
