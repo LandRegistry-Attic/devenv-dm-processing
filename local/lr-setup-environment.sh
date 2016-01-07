@@ -42,6 +42,18 @@ else
     echo `java -version`
 fi
 
+#install phantomjs
+echo "- - - installing phantomjs - - -"
+cd ~
+export PHANTOM_JS="phantomjs-1.9.7-linux-x86_64"
+wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
+mv $PHANTOM_JS.tar.bz2 /usr/local/share/
+cd /usr/local/share/
+tar xvjf $PHANTOM_JS.tar.bz2
+ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/share/phantomjs
+ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin/phantomjs
+ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/bin/phantomjs
+
 if type -p gradle; then
     echo 'gradle already installed.  Destroy VM to re-install.'
 else
