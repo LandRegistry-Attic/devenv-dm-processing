@@ -17,12 +17,9 @@ echo "Enabling gem globalcache..."
 rvm gemset globalcache enable
 
 echo "Installing Ruby..."
-rvm install ruby-2.2.1
+rvm install ruby-2.3.0
 
 echo "Turning off Gemfile warning..."
 rvm rvmrc warning ignore $dir/Gemfile
 
 cd $dir
-
-echo "Installing gem bundle..."
-bundle install

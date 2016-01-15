@@ -28,7 +28,9 @@ echo 'export PATH=$PATH:/vagrant/local' >> ${HOME}/.bash_profile
 # Initially we need to install a load of junk thats not provided by landregistry/centos
 echo "- - - Installing system dependencies - - -"
 sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-virtualenv python-jinja2 supervisor
-
+#for phantomjs
+sudo yum -y update
+sudo yum -y install libXext  libXrender  fontconfig  libfontconfig.so.1
 # Install Java
 if type -p java; then
     echo 'Java already installed.  Destroy VM to re-install.'
@@ -45,7 +47,7 @@ fi
 #install phantomjs
 echo "- - - installing phantomjs - - -"
 cd ~
-export PHANTOM_JS="phantomjs-1.9.7-linux-x86_64"
+export PHANTOM_JS="phantomjs-1.9.8-linux-x86_64"
 wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
 mv $PHANTOM_JS.tar.bz2 /usr/local/share/
 cd /usr/local/share/
