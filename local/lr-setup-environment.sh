@@ -25,9 +25,14 @@ echo 'export PS1=" \033[1;34mCASEWORK\033[0m \033[1;31m$ \033[0m"' >> ${HOME}/.b
 sed -i -e 's/.*add local dir to path//' ${HOME}/.bash_profile
 echo 'export PATH=$PATH:/vagrant/local' >> ${HOME}/.bash_profile
 
-# Initially we need to install a load of junk thats not provided by landregistry/centos
+# install dependencies not provided by landregistry/centos
 echo "- - - Installing system dependencies - - -"
-sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-virtualenv python-jinja2 supervisor
+sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-jinja2 supervisor python34
+wget https://bootstrap.pypa.io/get-pip.py
+sudo sudo python3.4 get-pip.py
+sudo pip install virtualenv
+sudo pip install virtualenvwrapper
+
 #for phantomjs
 sudo yum -y update
 sudo yum -y install libXext  libXrender  fontconfig  libfontconfig.so.1
