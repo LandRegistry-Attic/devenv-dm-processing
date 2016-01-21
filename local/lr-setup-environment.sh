@@ -29,7 +29,7 @@ echo 'export PATH=$PATH:/vagrant/local' >> ${HOME}/.bash_profile
 echo "- - - Installing system dependencies - - -"
 sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-jinja2 supervisor python34
 wget https://bootstrap.pypa.io/get-pip.py
-sudo sudo python3.4 get-pip.py
+sudo python3.4 get-pip.py
 sudo pip install virtualenv==14.0.0
 sudo pip install virtualenvwrapper==4.7.1
 
