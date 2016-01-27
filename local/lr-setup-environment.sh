@@ -27,11 +27,28 @@ echo 'export PATH=$PATH:/vagrant/local' >> ${HOME}/.bash_profile
 
 # install dependencies not provided by landregistry/centos
 echo "- - - Installing system dependencies - - -"
-sudo yum install -q -y git GitPython PyYAML python-devel python-pip python-jinja2 supervisor python34
+yum install -q -y gcc gcc-c++ supervisor python-jinja2 PyYAML git GitPython
+
+echo "Installing Python 3.4"
+yum -y install python34 python34-devel
+
+echo "Installing python pip"
+yum -y install python-pip
+sudo pip install --upgrade pip
+
+echo "Installing virtualenvwrapper"
+sudo pip install --upgrade virtualenv
+sudo pip install virtualenvwrapper
+source /usr/bin/virtualenvwrapper.sh
+echo "source /usr/bin/virtualenvwrapper.sh" >> ${HOME}/.bash_profile
+echo "export WORKON_HOME=/home/vagrant/.venv/" >>  ${HOME}/.bash_profile
+
+# download get-pip.py (also used in lr-setup-apps when setting up python apps)
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python3.4 get-pip.py
-sudo pip install virtualenv==14.0.0
-sudo pip install virtualenvwrapper==4.7.1
+
+echo "Installing killall command tool"
+yum install -y psmisc
 
 #for phantomjs
 sudo yum -y update
