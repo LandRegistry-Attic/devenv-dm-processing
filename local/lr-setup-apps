@@ -109,7 +109,7 @@ def setup(name,conf,template):
     if not os.path.exists(logpath):
         os.makedirs(logpath)
 
-    if conf['build'] and os.path.isfile(conf['build']):
+    if 'build' in conf and conf['build'] and os.path.isfile(conf['build']):
       subprocess.call(conf['build'], shell=True, stderr=subprocess.STDOUT, cwd=paths['apps'] + '/' + name )
     
     if conf['language'] == 'python':

@@ -34,11 +34,11 @@ yum -y install python34 python34-devel
 
 echo "Installing python pip"
 yum -y install python-pip
-pip install --upgrade pip
+sudo pip install --upgrade pip
 
 echo "Installing virtualenvwrapper"
-pip install --upgrade virtualenv
-pip install virtualenvwrapper
+sudo pip install --upgrade virtualenv
+sudo pip install virtualenvwrapper
 source /usr/bin/virtualenvwrapper.sh
 echo "source /usr/bin/virtualenvwrapper.sh" >> ${HOME}/.bash_profile
 echo "export WORKON_HOME=/home/vagrant/.venv/" >>  ${HOME}/.bash_profile
