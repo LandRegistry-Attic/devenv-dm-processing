@@ -7,6 +7,7 @@
       port: 9090
       run: /bin/sh /vagrant/apps/test-fixtures-api/run.sh
       build: source /vagrant/apps/test-fixtures-api/build.sh
+      language: gradle
       vars:
 
     register-adapter:
@@ -15,6 +16,7 @@
       port: 9091
       run: /bin/sh /vagrant/apps/register-adapter/run.sh
       build: source /vagrant/apps/register-adapter/build.sh
+      language: gradle
       vars:
 
     auto-process:
@@ -23,6 +25,7 @@
       port: 5001
       run: /bin/sh /vagrant/apps/auto-process/run_tests.sh
       build: source /vagrant/apps/auto-process/build.sh
+      language: python
       vars:
 
     acceptance-tests:
@@ -31,4 +34,5 @@
       port: 5002
       run: /bin/sh /vagrant/apps/acceptance-tests/run_tests.sh
       build: source /vagrant/apps/acceptance-tests/build.sh
+      language: ruby
       vars:
