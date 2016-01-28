@@ -99,6 +99,20 @@ fi
 
 sudo -i -u vagrant source install_rvm.sh
 
+#install postgresql
+echo "- - - Installing Postgres - - -"
+gem install --no-ri --no-rdoc puppet:3.7.5
+puppet module install puppetlabs-apt --version "<2.0.0"
+puppet module install puppetlabs-postgresql
+puppet apply /vagrant/manifests/postgres.pp
+#puppet does not configure headers.  So later installation of psycopg2 fails because libpq-fe.h is not found.
+#install postgresql-devel again to fix this (or fix the puppet installation).
+sudo yum -y install postgresql-devel
+#set known path to pgconfig so psycopg2 can install
+if [ -d /usr/pgsql-9.3/bin ]; then
+  export PATH=$PATH:/usr/pgsql-9.3/bin
+fi
+
 #add helpful aliases
 echo "source /vagrant/local/add-aliases.sh" >> ${HOME}/.bash_profile
 

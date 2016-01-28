@@ -40,11 +40,6 @@ class { 'postgresql::server::contrib':
   package_ensure => 'present',
 }
 
-postgresql::server::db { 'workingregister':
-  user     => 'workingregister',
-  password => 'md511c5a6395e27555ef43eb7b05c76d7c1',
-}
-
 postgresql::server::db { 'registermetadata':
   user     => 'vagrant',
   password => 'vagrant',
@@ -60,18 +55,6 @@ postgresql::server::role { 'root':
   superuser => true,
 }
 
-postgresql::server::database_grant { 'grant vagrant access to working register':
-  privilege => 'ALL',
-  db        => 'workingregister',
-  role      => 'vagrant',
-}
-
-postgresql::server::database_grant { 'grant root access to working register':
-  privilege => 'ALL',
-  db        => 'workingregister',
-  role      => 'root',
-}
-
 postgresql::server::database_grant { 'grant vagrant access to register metadata':
   privilege => 'ALL',
   db        => 'registermetadata',
@@ -84,20 +67,4 @@ postgresql::server::database_grant { 'grant root access to register metadata':
   role      => 'root',
 }
 
-postgresql::server::db { 'currentregister':
-  user     => 'currentregister',
-  password => 'currentregister',
-}
-
-postgresql::server::database_grant { 'grant vagrant access to current register':
-  privilege => 'ALL',
-  db        => 'currentregister',
-  role      => 'vagrant',
-}
-
-postgresql::server::database_grant { 'grant root access to current register':
-  privilege => 'ALL',
-  db        => 'currentregister',
-  role      => 'root',
-}
 
