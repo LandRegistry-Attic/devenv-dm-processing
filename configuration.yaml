@@ -36,3 +36,12 @@
       build: source /vagrant/apps/acceptance-tests/build.sh
       language: ruby
       vars:
+
+    process-digital-mortgage:
+      repo: git@git.lr.net:casework/process-digital-mortgage.git
+      branch: upgrade-script
+      port: 5000
+      run: /bin/sh /vagrant/apps/process-digital-mortgage/run.sh
+      build: /bin/sh /vagrant/apps/process-digital-mortgage/upgrade.sh
+      language: python
+      vars:
