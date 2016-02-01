@@ -47,7 +47,8 @@ Vagrant.configure(2) do |node|
       node.vm.network :forwarded_port, guest: port, host: port
     end
 
-    node.vm.network :forwarded_port, guest: 5432, host: 15432
+    # Map the port for Postgresql
+    node.vm.network :forwarded_port, guest: 5432, host: 5432
   end
 
   # Run scripts to configure environment

@@ -19,15 +19,6 @@
       language: gradle
       vars:
 
-    auto-process:
-      repo: git@git.lr.net:casework/auto-process.git
-      branch: develop
-      port: 5001
-      run: /bin/sh /vagrant/apps/auto-process/run_tests.sh
-      build: source /vagrant/apps/auto-process/build.sh
-      language: python
-      vars:
-
     acceptance-tests:
       repo: git@git.lr.net:casework/acceptance-tests.git
       branch: develop
