@@ -30,7 +30,7 @@
 
     process-digital-mortgage:
       repo: git@git.lr.net:casework/process-digital-mortgage.git
-      branch: upgrade-script
+      branch: develop
       port: 5000
       run: /bin/sh /vagrant/apps/process-digital-mortgage/run.sh
       build: /bin/sh /vagrant/apps/process-digital-mortgage/upgrade.sh
