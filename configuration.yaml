@@ -22,9 +22,6 @@
     acceptance-tests:
       repo: git@git.lr.net:casework/acceptance-tests.git
       branch: develop
-      port: 5999
-      run:
-      build:
       language: ruby
       vars:
 
@@ -40,8 +37,5 @@
     migrate_metadata:
       repo: git@git.lr.net:casework/migrate_metadata.git
       branch: develop
-      port:5998
-      run:
-      build:
       language: gradle
       vars:
