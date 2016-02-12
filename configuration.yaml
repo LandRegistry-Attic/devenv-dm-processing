@@ -25,6 +25,12 @@
       language: ruby
       vars:
 
+    migrate_metadata:
+      repo: git@git.lr.net:casework/migrate_metadata.git
+      branch: develop
+      language: gradle
+      vars:
+
     process-digital-mortgage:
       repo: git@git.lr.net:casework/process-digital-mortgage.git
       branch: develop
@@ -34,8 +40,4 @@
       language: python
       vars:
 
-    migrate_metadata:
-      repo: git@git.lr.net:casework/migrate_metadata.git
-      branch: develop
-      language: gradle
-      vars:
+
