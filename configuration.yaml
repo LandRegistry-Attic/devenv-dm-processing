@@ -22,9 +22,9 @@
     acceptance-tests:
       repo: git@git.lr.net:casework/acceptance-tests.git
       branch: develop
-      port: 5002
-      run: /bin/sh /vagrant/apps/acceptance-tests/run_tests.sh
-      build: source /vagrant/apps/acceptance-tests/build.sh
+      port:
+      run:
+      build:
       language: ruby
       vars:
 
@@ -35,4 +35,13 @@
       run: /bin/sh /vagrant/apps/process-digital-mortgage/run.sh
       build: /bin/sh /vagrant/apps/process-digital-mortgage/upgrade.sh
       language: python
+      vars:
+
+    migrate_metadata:
+      repo: git@git.lr.net:casework/migrate_metadata.git
+      branch: develop
+      port:
+      run:
+      build:
+      language: gradle
       vars:
