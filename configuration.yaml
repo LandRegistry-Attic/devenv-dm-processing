@@ -40,4 +40,12 @@
       language: python
       vars:
 
+    mock_deed_api:
+      repo: git@git.lr.net:casework/mock_deed_api.git
+      branch: develop
+      port: 5003
+      run: /bin/sh /vagrant/apps/mock_deed_api/run.sh
+      language: python
+      vars:
+
 
