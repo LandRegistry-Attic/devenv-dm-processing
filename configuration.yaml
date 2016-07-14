@@ -40,12 +40,21 @@
       language: python
       vars:
 
-    mock_deed_api:
-      repo: git@git.lr.net:casework/mock_deed_api.git
+    deed_api_stub:
+      repo: git@git.lr.net:casework/deed-api-stub.git
       branch: develop
-      port: 5003
-      run: /bin/sh /vagrant/apps/mock_deed_api/run.sh
+      port: 5006
+      run: /bin/sh /vagrant/apps/deed-api-stub/run.sh
       language: python
+      vars:
+
+    title-adapter-api:
+      repo: git@192.168.249.38:common/title-adapter-api.git
+      branch: develop
+      port: 9092
+      run: /bin/sh /vagrant/apps/title-adapter-api/run.sh
+      build: source /vagrant/apps/title-adapter-api/build.sh
+      language: gradle
       vars:
 
 
