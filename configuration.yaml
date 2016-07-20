@@ -40,7 +40,7 @@
       language: python
       vars:
 
-    deed_api_stub:
+    deed-api-stub:
       repo: git@git.lr.net:casework/deed-api-stub.git
       branch: develop
       port: 5006
