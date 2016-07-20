@@ -48,13 +48,4 @@
       language: python
       vars:
 
-    title-adapter-api:
-      repo: git@192.168.249.38:common/title-adapter-api.git
-      branch: develop
-      port: 9092
-      run: /bin/sh /vagrant/apps/title-adapter-api/run.sh
-      build: source /vagrant/apps/title-adapter-api/build.sh
-      language: gradle
-      vars:
-
 
